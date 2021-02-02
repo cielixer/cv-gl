@@ -16,6 +16,7 @@
 #include <opencv2/core/opengl.hpp>
 #include <gl/glew.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <tiny_obj_loader.h>
 

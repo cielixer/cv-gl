@@ -84,6 +84,7 @@ namespace cvgl {
 
 		inline auto bind() {
 			glUseProgram(m_program);
+			return m_program;
 		}
 
 		inline auto unbind() {
@@ -167,6 +168,41 @@ namespace cvgl {
 	};
 
 	cvgl::Model loadModel(std::string_view model_path);
+
+	inline auto render(const Model& model) {
+		glBindVertexArray(model.vao);
+
+		glBindBuffer(GL_ARRAY_BUFFER, model.vertex_vbo);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+
+		if (model.has_normal) {
+			glBindBuffer(GL_ARRAY_BUFFER, model.normal_vbo);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+		}
+		if (model.has_texcoord) {
+			glBindBuffer(GL_ARRAY_BUFFER, model.texcoord_vbo);
+			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+		}
+
+		glDrawArrays(GL_TRIANGLES, 0, model.sz);
+
+		if (model.has_texcoord) {
+			glDisableVertexAttribArray(2);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		if (model.has_normal) {
+			glDisableVertexAttribArray(1);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+
+		glDisableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		glBindVertexArray(0);
+	}
 
 	glm::mat4 cvProj2glProj(float fx, float fy, float cx, float cy, float w, float h);
 

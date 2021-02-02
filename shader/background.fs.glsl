@@ -21,7 +21,7 @@ void main()
     }
 
     // 펙셀 값을 가져옴
-    vec3 tex_color = texelFetch(texture, tex_coord, 0).xzy;
+    vec3 tex_color = texelFetch(texture, tex_coord, 0).xyz;
 
     if (flip_rgb != 0) {
         tex_color.xyz = tex_color.zyx;

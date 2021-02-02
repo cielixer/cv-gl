@@ -137,7 +137,7 @@ glm::mat4 cvgl::cvProj2glProj(float fx, float fy, float cx, float cy, float w, f
 
 glm::mat4 cvgl::cvRT2glRT(const cv::Mat& cvRT)
 {
-	glm::mat4 convertCV2GL{
+	static constexpr glm::mat4 convertCV2GL{
 		1.f, 0.f, 0.f, 0.f,
 		0.f, -1.f, 0.f, 0.f,
 		0.f, 0.f, -1.f, 0.f,

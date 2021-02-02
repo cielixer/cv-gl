@@ -1,6 +1,6 @@
 #version 460 core
 
-layout(location = 0) out vec3 color;
+layout(location = 0) out vec4 color;
 
 in VS_OUT {
     vec3 N;
@@ -9,7 +9,7 @@ in VS_OUT {
 } fs_in;
 
 // ambient color
-uniform vec3 ambient_albedo = vecc3(0.1);
+uniform vec3 ambient_albedo = vec3(0.1);
 // diffuse color
 uniform vec3 diffuse_albedo = vec3(0.7, 0.7, 0.7);
 
@@ -21,5 +21,6 @@ void main(void)
 
     vec3 diffuse = max(dot(N, L), 0.0) * diffuse_albedo;
 
-    color = ambient_albedo + diffuse;
+    color.rgb = ambient_albedo + diffuse;
+    color.a = 1;
 }
