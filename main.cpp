@@ -185,7 +185,7 @@ void sample_simple_3D(const cv::Size& win_sz)
 			synthesis_fbo.getTargetTexture().copyTo(render_result);
 			cv::imshow("render_result", render_result);
 
-			// 현재 확인된 에러...
+			// 현재 확인된 버그
 			/*
 			* 복잡한 렌더링 과정을 거치고 cv::imshow("gl_window", ...)로
 			* 생성된 opengl window에 렌더링을 하게 되면 이상한 에러가 발생하면서
